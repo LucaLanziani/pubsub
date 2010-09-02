@@ -24,6 +24,7 @@ int update_test(PSData_p data) {
 
 int main(int argc, char** argv) {
     publishers_p l_o_p;
+
     publisher_p I, N, T;
 
 
@@ -67,27 +68,28 @@ int main(int argc, char** argv) {
     publisher_add_subscriber(T, S2);
     publisher_add_subscriber(T, S3);
 */
-    PRINT_D("non mi dire che segmenti qui...");
+   
     publisher_add_and_create_subscriber(N,"Sub1: ", &update,NULL);
     publisher_add_and_create_subscriber(N,"Sub2: ", &update,NULL);
-    publisher_add_and_create_subscriber(N,"Sub2: ", &update_test,NULL); //avendo messo lo stesso nome del precedente.. non viene aggiunto alla lista
-    PRINT_D("non mi dire che segmenti qui...");
+    publisher_add_and_create_subscriber(N,"Sub3: ", &update_test,NULL); //avendo messo lo stesso nome del precedente.. non viene aggiunto alla lista
+   
     publisher_add_and_create_subscriber(T,"Pippo: ", &update,NULL);
     publisher_add_and_create_subscriber(T,"Pluto: ", &update,NULL);
     publisher_add_and_create_subscriber(T,"Paperino: ", &update_test,NULL);
-    PRINT_D("non mi dire che segmenti qui...");
+   
     //vanno create le funzioni per gestire la truttura PSData_t
     PSData_p data;
     data=(PSData_p)calloc(1,sizeof(PSData_t));
     data->data=(char*)calloc(25,sizeof(char));
     strcpy(data->data,"Ciao Mondo");
+
     publisher_notify(N,data);
 
     PRINT_D("\nSeconda parte");
     strcpy(data->data,"Ciao Mondo1");
     publisher_notify(T,data);
     PRINT_D("Dovrebbero essere uguali")
-    publisher_by_name_notify(l_o_p,"Test",data);
+    publisher_by_name_notify(l_o_p,"Naviga",data);
     PRINT_D("FINE\n");
 
 };
