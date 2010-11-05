@@ -7,19 +7,29 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "publisher_list.h"
 #include "subscriber_list.h"
 
 /*
  * 
  */
-
+//creo due esempi di funzioni da passare ai publisher
+//potrebbero rappresentare funzioni dei vari subscriber
+//ATTENZIONE TALI FUNZIONI PER CONVENZIONE DEVO RICEVERE UN PARAMETRO DI TIPO PSData_p
 int update(PSData_p data) {
-    printf("UPDATE %s\n", (char*) data->data);
+    if (data->DataType==char_ptr_t){
+        printf("UPDATE %s\n", (char*) data->data);
+        return StatusOK;
+    } else return data_type_error;
 };
 
+
 int update_test(PSData_p data) {
-    printf("UPDATE_TEST %s\n", (char*) data->data);
+    if (data->DataType==char_ptr_t){
+        printf("UPDATE_TEST %s\n", (char*) data->data);
+        return StatusOK;
+    } else return data_type_error;
 };
 
 int main(int argc, char** argv) {
@@ -27,25 +37,24 @@ int main(int argc, char** argv) {
 
     publisher_p I, N, T;
 
-
+	//creo la lista dei publisher
     publishers_list_new(&l_o_p);
-
+	
+	//creo il publisher I
     publisher_new(&I);
+	//Lo inizializzo dandogli un nome
     publisher_init(I, "IPhone");
+	//Lo aggiungo alla lista l_o_p
     publisher_tail_add(l_o_p, I);
 
+	//come sopra ma con il publisher N
     publisher_new(&N);
     publisher_init(N, "Naviga");
     publisher_tail_add(l_o_p, N);
- /*
-    publisher_new(&T);
-   
-    publisher_init(T, "Test");
-    publisher_tail_add(l_o_p, T);
-*/
-    PRINT_D("STO QUA");
+
+	//Con una sola funzione creo il publisher gli assegno un nome e lo aggiungo in coda alla lista
     publisher_new_init_tail_add(l_o_p,"Naviga",&T);
-    PRINT_D("T a quest punto vale %p",T);
+
 
     subscriber_p S1, S2, S3;
 /*
@@ -69,6 +78,8 @@ int main(int argc, char** argv) {
     publisher_add_subscriber(T, S3);
 */
    
+	//aggiungo ad un publisher (in questo caso N) un subscriver
+	//semplicemente passando il nome del subscriber e la funzione su cui riceverà le notifiche
     publisher_add_and_create_subscriber(N,"Sub1: ", &update,NULL);
     publisher_add_and_create_subscriber(N,"Sub2: ", &update,NULL);
     publisher_add_and_create_subscriber(N,"Sub3: ", &update_test,NULL); //avendo messo lo stesso nome del precedente.. non viene aggiunto alla lista
@@ -79,14 +90,16 @@ int main(int argc, char** argv) {
    
     //vanno create le funzioni per gestire la truttura PSData_t
     PSData_p data;
-    data=(PSData_p)calloc(1,sizeof(PSData_t));
+	ps_data_new_init_fill_with_string(&data,"--->Ciao Mondo");
+/*
+	data=(PSData_p)calloc(1,sizeof(PSData_t));
     data->data=(char*)calloc(25,sizeof(char));
     strcpy(data->data,"Ciao Mondo");
-
+*/
     publisher_notify(N,data);
-
     PRINT_D("\nSeconda parte");
-    strcpy(data->data,"Ciao Mondo1");
+    strcpy(data->data,"Ciao Mondo1\0");
+    PRINT_D("\nData=%s",(char *)data->data);
     publisher_notify(T,data);
     PRINT_D("Dovrebbero essere uguali")
     publisher_by_name_notify(l_o_p,"Naviga",data);

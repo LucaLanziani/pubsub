@@ -16,7 +16,8 @@
                    projectFiles="true"
                    kind="SOURCE_LOGICAL_FOLDER">
       <itemPath>main.c</itemPath>
-      <itemPath>ps_type.h</itemPath>
+      <itemPath>ps_types.h</itemPath>
+	  <itemPath>ps_types.c</itemPath>
       <itemPath>publisher_list.c</itemPath>
       <itemPath>publisher_list.h</itemPath>
       <itemPath>subscriber_list.c</itemPath>
@@ -40,7 +41,7 @@
       <toolsSet>
         <developmentServer>localhost</developmentServer>
         <compilerSet>GNU|GNU</compilerSet>
-        <platform>2</platform>
+        <platform>4</platform>
       </toolsSet>
       <compileType>
       </compileType>

@@ -9,7 +9,7 @@
 #define PUBLISHER_LIST_H_
 
 #include "subscriber_list.h"
-#include "ps_type.h"
+#include "ps_types.h"
 
 
 #define MAX_PUBLISHER_NAME_LENGHT 15

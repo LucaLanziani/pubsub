@@ -8,7 +8,7 @@
 #ifndef SUBSCRIBER_LIST_H
 #define	SUBSCRIBER_LIST_H
 
-#include "ps_type.h"
+#include "ps_types.h"
 
 #define MAX_SUBSCRIBER_NAME_LENGHT 15
 

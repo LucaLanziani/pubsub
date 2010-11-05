@@ -13,22 +13,27 @@
 #include <string.h>
 #include <stdarg.h>
 
-#define DEBUG
-#define YELLOW "\033[1;33m"
-#define RED "\033[31m"
-#define GREEN "\033[32m"
+#ifndef PS_DEBUG
+#define PS_DEBUG
+#define PS_YELLOW "\033[1;33m"
+#define PS_RED "\033[31m"
+#define PS_GREEN "\033[32m"
 
-#ifdef DEBUG
-#define PRINT_D(format, args...)  printf(YELLOW format"\033[0m\n", ##args);
+#ifdef PS_DEBUG
+#define PRINT_D(format, args...)  printf(PS_YELLOW format"\033[0m\n", ##args);
 #else
 #define PRINT_D(format, args...)
 #endif
 
+#endif
+
+
 typedef enum {
     StatusOK = 0,
     params_error = -1,
-    not_found = -2,
-    duplicated_name = -3
+    data_type_error = -2,
+    not_found = -3,
+    duplicated_name = -4
 } PSErrors;
 
 //il tipo dei dati che possono essere restituiti
@@ -43,8 +48,8 @@ typedef enum {
 //la struttura con cui la chiamata restituirà i dati
 
 typedef struct {
-    void* data;
-    PSTypes DataType;
+	void* data;
+	PSTypes DataType;
 } PSData_t;
 
 typedef PSData_t* PSData_p;
@@ -56,3 +61,9 @@ typedef int (*update_fun)(PSData_p data);
 
 
 #endif /* PS_TYPES_H_ */
+
+PSErrors ps_data_new(PSData_p* data);
+PSErrors ps_data_init(PSData_p data);
+PSErrors ps_data_new_init_fill_with_string(PSData_p *data,char *string);
+PSErrors ps_data_fill_with_string(PSData_p data,char *string);
+PSErrors ps_data_fill_with_int(PSData_p data,int number);
