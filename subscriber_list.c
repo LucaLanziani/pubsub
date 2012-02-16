@@ -63,10 +63,13 @@ PSErrors subscriber_head_add(subscribers_p ss, subscriber_p s) {
 
     if (ss->head == NULL) {
         ss->head = s;
-        ss->head = s;
     } else {
+        ss->head->prev = s;
         s->next = ss->head;
         ss->head = s;
+    }
+    if (ss->tail == NULL) {
+        ss->tail = s;
     }
     return StatusOK;
 };

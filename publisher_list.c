@@ -75,10 +75,13 @@ PSErrors publisher_head_add(publishers_p ps, publisher_p p) {
 
     if (ps->head == NULL) {
         ps->head = p;
-        ps->head = p;
     } else {
+        ps->head->prev = p;
         p->next = ps->head;
         ps->head = p;
+    }
+    if (ps->tail==NULL) {
+        ps->tail = p;
     }
     return StatusOK;
 };
