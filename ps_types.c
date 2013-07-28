@@ -1,10 +1,3 @@
-/*
- * publisher_list.c
- *
- *  Created on: 15/ago/2010
- *      Author: mosca
- */
-
 #include "ps_types.h"
 
 PSErrors ps_data_new(PSData_p* d_p) {

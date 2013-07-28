@@ -1,10 +1,3 @@
-/*
- * publisher_list.h
- *
- *  Created on: 15/ago/2010
- *      Author: mosca
- */
-
 #ifndef PUBLISHER_LIST_H_
 #define PUBLISHER_LIST_H_
 

@@ -1,10 +1,3 @@
-/*
- * subscriber_list.c
- *
- *  Created on: 15/ago/2010
- *      Author: mosca
- */
-
 #include "subscriber_list.h"
 
 PSErrors subscribers_list_new(subscribers_p *temp_p) {

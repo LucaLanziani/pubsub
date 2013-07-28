@@ -1,10 +1,3 @@
-/*
- * publisher_list.c
- *
- *  Created on: 15/ago/2010
- *      Author: mosca
- */
-
 #include "publisher_list.h"
 
 PSErrors publishers_list_new(publishers_p *temp_p) {

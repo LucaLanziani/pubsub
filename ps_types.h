@@ -1,10 +1,3 @@
-/*
- * message_type.h
- *
- *  Created on: 15/ago/2010
- *      Author: mosca
- */
-
 #ifndef PS_TYPES_H_
 #define PS_TYPES_H_
 
