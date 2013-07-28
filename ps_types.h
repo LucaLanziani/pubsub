@@ -37,7 +37,6 @@ typedef enum {
 } PSErrors;
 
 //il tipo dei dati che possono essere restituiti
-
 typedef enum {
     int_t = 0,
     char_t = 1,
@@ -46,7 +45,6 @@ typedef enum {
 } PSTypes;
 
 //la struttura con cui la chiamata restituirà i dati
-
 typedef struct {
 	void* data;
 	PSTypes DataType;

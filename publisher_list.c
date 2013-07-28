@@ -21,7 +21,7 @@ PSErrors publishers_list_new(publishers_p *temp_p) {
 PSErrors publisher_new(publisher_p *temp_p) {
     *temp_p = (publisher_p) calloc(1, sizeof (publisher_t));
     publisher_p temp = (*temp_p);
-    memset(temp->name, 0, sizeof (temp->name));
+    memset(temp->name, 0, sizeof(temp->name));
     temp->next = NULL;
     temp->prev = NULL;
     return StatusOK;
@@ -37,7 +37,7 @@ PSErrors publisher_init(publisher_p p, publisher_name name) {
     return StatusOK;
 }
 
-PSErrors publisher_new_init_tail_add(publishers_p ps,publisher_name name,publisher_p* p) {
+PSErrors publisher_init_and_tail_add(publishers_p ps, publisher_p* p, publisher_name name) {
     if ((ps == NULL) || (name == NULL)) return params_error;
     PSErrors result;
     publisher_p temp_p;
@@ -251,7 +251,7 @@ PSErrors publisher_add_subscriber(publisher_p p, subscriber_p s) {
     return subscriber_tail_add(p->subscribers, s);
 }
 
-PSErrors publisher_add_and_create_subscriber(publisher_p p,subscriber_name name,update_fun update,subscriber_p *s) {
+PSErrors publisher_create_and_add_subscriber(publisher_p p,subscriber_p *s,subscriber_name name,update_fun update) {
     if ((p == NULL) || (name == NULL) || (update==NULL)) return params_error;
     PSErrors result;
     subscriber_p temp_s;
@@ -274,21 +274,22 @@ PSErrors publisher_notify(publisher_p p, PSData_p d) {
     subscriber_p temp_s;
     subscribers_head(p->subscribers,&temp_s);
     while (temp_s != NULL) {
-        PRINT_D("Sono il publisher %s e sto notificando a %s",p->name,temp_s->name);
+        PRINT_D("I'm the publisher %s and I'm notifying the subscriber %s",p->name,temp_s->name);
         temp_s->update(d);
         subscriber_next(p->subscribers,temp_s,&temp_s);
     }
     return StatusOK;
 }
 
-PSErrors publisher_by_name_notify(publishers_p ps, publisher_name name, PSData_p d){
+PSErrors publisher_notify_by_name(publishers_p ps, publisher_name name, PSData_p d){
     if ((ps==NULL) || (d==NULL)) return params_error;
     PSErrors result;
     publisher_p p;
-    if ((result==publishers_by_name_find(ps,name,&p))!=StatusOK) return result;
+    if ((result=publishers_by_name_find(ps,name,&p)) != StatusOK) {
+      return result;
+    }
     return publisher_notify(p,d);
-    
-};
+}
 
 /*
 PSErrors publisher_notify_test_add_subscriber_name(publisher_p p, PSData_p d) {

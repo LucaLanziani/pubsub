@@ -1,12 +1,5 @@
-/* 
- * File:   subscriber_list.h
- * Author: mosca
- *
- * Created on 31 agosto 2010, 16.05
- */
-
 #ifndef SUBSCRIBER_LIST_H
-#define	SUBSCRIBER_LIST_H
+#define SUBSCRIBER_LIST_H
 
 #include "ps_types.h"
 

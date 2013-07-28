@@ -338,12 +338,12 @@ PSErrors publisher_notify(publisher_p publisher, PSData_p data);
         Description:
             Find a publisher by name and push data at all the subscribers added to it
 */
-PSErrors publisher_by_name_notify(publishers_p publisher_list, publisher_name name, PSData_p);
+PSErrors publisher_notify_by_name(publishers_p publisher_list, publisher_name name, PSData_p);
 
 //TO-DO
 
-PSErrors publisher_add_and_create_subscriber(publisher_p,subscriber_name,update_fun,subscriber_p*);
-PSErrors publisher_new_init_tail_add(publishers_p publisher_list,publisher_name,publisher_p*);
+PSErrors publisher_create_add_and_subscriber(publisher_p,subscriber_p*,subscriber_name,update_fun);
+PSErrors publisher_init_and_tail_add(publishers_p publisher_list,publisher_p*, publisher_name);
 PSErrors publisher_notify_test(publisher_p);
 /*
 PSErrors publisher_notify_all(publishers_p publishers_list,PSData_p)
