@@ -13,7 +13,6 @@ PSErrors ps_data_init(PSData_p d) {
 };
 
 
-
 PSErrors ps_data_new_init_and_fill_with_string(PSData_p *data, char *string) {
     PSData_p temp_d;
     PSErrors result;

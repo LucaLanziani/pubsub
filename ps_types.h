@@ -29,7 +29,7 @@ typedef enum {
     duplicated_name = -4
 } PSErrors;
 
-//il tipo dei dati che possono essere restituiti
+//Data type can be returned
 typedef enum {
     int_t = 0,
     char_t = 1,
@@ -37,7 +37,7 @@ typedef enum {
     float_t = 3
 } PSTypes;
 
-//la struttura con cui la chiamata restituirà i dati
+//The data structure that will be returned
 typedef struct {
 	void* data;
 	PSTypes DataType;
@@ -45,7 +45,7 @@ typedef struct {
 
 typedef PSData_t* PSData_p;
 
-//definisco il prototipo della funzione che dovrà fornire gli update
+//The prototype of the update function
 typedef int (*update_fun)(PSData_p data);
 
 
